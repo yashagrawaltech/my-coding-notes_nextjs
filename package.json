@@ -15,6 +15,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "prisma:generate": "prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
