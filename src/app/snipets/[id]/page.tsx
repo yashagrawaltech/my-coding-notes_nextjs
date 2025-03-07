@@ -39,4 +39,12 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
+export const generateStaticParams = async () => {
+  const snipets = await prisma.snipets.findMany();
+
+  return snipets.map((s) => {
+    return { id: s.id.toString() };
+  });
+};
+
 export default page;

@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { Snipets } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export const createSnipet = async (
@@ -28,6 +29,7 @@ export const createSnipet = async (
     return { message };
   }
 
+  revalidatePath('/');
   redirect('/');
 };
 
@@ -42,6 +44,8 @@ export const saveSnipet = async (snipet: Snipets) => {
     },
   });
 
+  revalidatePath(`/snipets/${snipet.id}`);
+  revalidatePath('/');
   redirect(`/snipets/${snipet.id}`);
 };
 
@@ -52,5 +56,6 @@ export const deleteSnipet = async (id: string) => {
     },
   });
 
+  revalidatePath('/');
   redirect(`/`);
 };
